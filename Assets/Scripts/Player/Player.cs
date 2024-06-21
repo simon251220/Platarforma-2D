@@ -19,8 +19,14 @@ public class Player : MonoBehaviour
     public float animationDuration = .3f;
     public Ease ease = Ease.OutBack;
 
+    [Header("Animation Animator")]
+    public string boolRun = "Run";
+    public Animator animator;
+    public float durationScale = .1f;
+
     void Update()
     {
+        print(playerRigidbody2D.velocity.x);
         HandleJump();
         HandleMovement();
     }
@@ -30,19 +36,36 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftControl))
         {
             _currentSpeed = runSpeed;
+            animator.speed = 2;
         }
         else
         {
             _currentSpeed = speed;
+            animator.speed = 1;
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             playerRigidbody2D.velocity = new Vector2(-_currentSpeed, playerRigidbody2D.velocity.y);
+            if(playerRigidbody2D.transform.localScale.x != -1)
+            {
+                playerRigidbody2D.transform.DOScaleX(-1, durationScale);
+            }
+                
+            animator.SetBool(boolRun, true);
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
             playerRigidbody2D.velocity = new Vector2(_currentSpeed, playerRigidbody2D.velocity.y);
+            if (playerRigidbody2D.transform.localScale.x != 1)
+            {
+                playerRigidbody2D.transform.DOScaleX(1, durationScale);
+            }
+            animator.SetBool(boolRun, true);
+        }
+        else
+        {
+            animator.SetBool(boolRun, false);
         }
 
         if(playerRigidbody2D.velocity.x > 0)
