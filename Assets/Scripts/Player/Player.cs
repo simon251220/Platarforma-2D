@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        print(playerRigidbody2D.velocity.x);
+        
         HandleJump();
         HandleMovement();
     }
@@ -85,7 +85,15 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             playerRigidbody2D.velocity = Vector2.up * forceJump;
-            playerRigidbody2D.transform.localScale = Vector2.one;
+            
+            if (transform.localScale.x > 0)
+            {
+                playerRigidbody2D.transform.localScale = Vector2.one;
+            }
+            else if (transform.localScale.x < 0)
+            {
+                playerRigidbody2D.transform.localScale = new Vector2(-1, 1);
+            }
 
             DOTween.Kill(playerRigidbody2D.transform);
 
@@ -95,7 +103,17 @@ public class Player : MonoBehaviour
 
     private void HandleScaleJump()
     {
+        
         playerRigidbody2D.transform.DOScaleY(jumpScaleY, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
-        playerRigidbody2D.transform.DOScaleX(jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+
+        if(transform.localScale.x > 0)
+        {
+            playerRigidbody2D.transform.DOScaleX(-jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+        }
+        else if(transform.localScale.x < 0)
+        {
+            playerRigidbody2D.transform.DOScaleX(-jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+        }
+        
     }
 }
