@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
 
         if(transform.localScale.x > 0)
         {
-            playerRigidbody2D.transform.DOScaleX(-jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
+            playerRigidbody2D.transform.DOScaleX(jumpScaleX, animationDuration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
         }
         else if(transform.localScale.x < 0)
         {
