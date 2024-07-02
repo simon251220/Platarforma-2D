@@ -11,6 +11,15 @@ public class GunBase : MonoBehaviour
     public float timeBetWeenShoot = .3f;
     private Coroutine _shootCoroutine;
     // Update is called once per frame
+
+    private void Awake()
+    {
+        if (playerSideReference == null)
+        {
+            playerSideReference = GameObject.Find("Player").transform;
+        }
+
+    }
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.K))

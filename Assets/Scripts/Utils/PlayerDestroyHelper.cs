@@ -8,6 +8,10 @@ public class PlayerDestroyHelper : MonoBehaviour
 
    public void KillPlayer()
    {
+        if(player == null)
+        {
+            player = GameObject.Find("Player").GetComponent<Player>();
+        }
         player.DestroyMe();
    }
 }

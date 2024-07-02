@@ -20,6 +20,12 @@ public class ItenCollactableBase : MonoBehaviour
         OnCollect();
     }
 
+    /*protected virtual void Collect2()
+    {
+        gameObject.SetActive(false);
+        OnCollect();
+    }*/
+
     protected virtual void OnCollect()
     {
 
