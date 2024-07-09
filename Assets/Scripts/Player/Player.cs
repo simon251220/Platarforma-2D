@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public float disToGround;
     public float spaceToGround;
     public ParticleSystem jumpVFX;
+    public AudioSource audioSourcePlayerJump;
 
     void Awake()
     {
@@ -52,6 +53,13 @@ public class Player : MonoBehaviour
     {
         //if(jumpVFX != null)jumpVFX.Play();
         VFXManager.Instance.PlayVFXByType(VFXManager.VFXType.JUMP, transform.position);
+
+    }
+
+    private void PlayJumpSFX()
+    {
+        //if(jumpVFX != null)jumpVFX.Play();
+        audioSourcePlayerJump.Play();
 
     }
 
@@ -117,6 +125,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             PlayJumpVFX();
+            PlayJumpSFX();
             playerRigidbody2D.velocity = Vector2.up * soPlayerSetup.forceJump;
             
             if (transform.localScale.x > 0)

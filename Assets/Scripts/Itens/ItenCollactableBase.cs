@@ -9,6 +9,9 @@ public class ItenCollactableBase : MonoBehaviour
     public float timeToHide = 3;
     public GameObject graphicIten;
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+
 
     private void Awake()
     {
@@ -47,5 +50,6 @@ public class ItenCollactableBase : MonoBehaviour
     protected virtual void OnCollect()
     {
         if (particleSystem != null) particleSystem.Play();
+        if (audioSource != null) audioSource.Play();
     }
 }
