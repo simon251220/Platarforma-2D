@@ -14,6 +14,7 @@ public class ProjectileBase : MonoBehaviour
     }
     void Update()
     {
+        
         transform.Translate(direction * Time.deltaTime * side);
     }
 
